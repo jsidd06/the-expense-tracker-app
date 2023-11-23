@@ -1,13 +1,14 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { GlobalStyles } from "../../constants/style";
+import { formattedDate } from "../../utils/formatedDate";
 
 const ExpensesItem = ({ description, amount, date }) => {
   return (
     <View style={styles.ctn}>
       <View style={styles.descriptionCtn}>
         <Text style={styles.textBase}>{description}</Text>
-        <Text style={styles.textBase}>{date?.toString()}</Text>
+        <Text style={styles.textBase}>{formattedDate(date)}</Text>
       </View>
       <View style={styles.subCtn}>
         <Text
@@ -17,7 +18,7 @@ const ExpensesItem = ({ description, amount, date }) => {
             textAlign: "center",
           }}
         >
-          ${amount}
+          ${amount?.toFixed(2)}
         </Text>
       </View>
     </View>
@@ -32,11 +33,14 @@ const styles = StyleSheet.create({
     backgroundColor: GlobalStyles.colors.primary700,
     padding: 10,
     justifyContent: "space-between",
-    marginVertical: 5,
+    alignItems: "center",
+    marginTop: 5,
     borderRadius: 8,
     elevation: 3,
     shadowColor: GlobalStyles.colors.primary500,
     shadowOffset: { width: 0, height: 0 },
+    marginBottom: 10,
+    paddingBottom: 10,
   },
   textBase: {
     fontSize: 16,
@@ -49,6 +53,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     padding: 5,
     borderRadius: 8,
+    width: 80,
+    height: 40,
   },
   descriptionCtn: {
     marginVertical: 8,
