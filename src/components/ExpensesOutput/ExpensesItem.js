@@ -1,27 +1,33 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { GlobalStyles } from "../../constants/style";
 import { formattedDate } from "../../utils/formatedDate";
 
 const ExpensesItem = ({ description, amount, date }) => {
+  const pressHandler = () => {};
   return (
-    <View style={styles.ctn}>
-      <View style={styles.descriptionCtn}>
-        <Text style={styles.textBase}>{description}</Text>
-        <Text style={styles.textBase}>{formattedDate(date)}</Text>
+    <Pressable
+      onPress={pressHandler}
+      style={({ pressed }) => pressed && styles.pressed}
+    >
+      <View style={styles.ctn}>
+        <View style={styles.descriptionCtn}>
+          <Text style={styles.textBase}>{description}</Text>
+          <Text style={styles.textBase}>{formattedDate(date)}</Text>
+        </View>
+        <View style={styles.subCtn}>
+          <Text
+            style={{
+              ...styles.textBase,
+              color: GlobalStyles.colors.primary800,
+              textAlign: "center",
+            }}
+          >
+            ${amount?.toFixed(2)}
+          </Text>
+        </View>
       </View>
-      <View style={styles.subCtn}>
-        <Text
-          style={{
-            ...styles.textBase,
-            color: GlobalStyles.colors.primary800,
-            textAlign: "center",
-          }}
-        >
-          ${amount?.toFixed(2)}
-        </Text>
-      </View>
-    </View>
+    </Pressable>
   );
 };
 
@@ -58,5 +64,8 @@ const styles = StyleSheet.create({
   },
   descriptionCtn: {
     marginVertical: 8,
+  },
+  pressed: {
+    opacity: 0.5,
   },
 });
