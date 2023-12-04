@@ -19,7 +19,14 @@ const ExpensesForm = ({ onCancel, submitHandlerLabel, onSubmit }) => {
     });
   };
 
-  const submitHandler = () => {};
+  const submitHandler = () => {
+    const expensesData = {
+      amount: +inputValues.amount,
+      date: new Date(inputValues.date),
+      description: inputValues.description,
+    };
+    onSubmit(expensesData);
+  };
 
   return (
     <View style={styles.form}>
