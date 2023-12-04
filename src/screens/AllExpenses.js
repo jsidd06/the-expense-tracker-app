@@ -9,6 +9,7 @@ const AllExpensesScreen = () => {
     <ExpensesOutput
       expenses={expensesCtx.expenses}
       expensesPeriodName="Total"
+      fallBackText="No registered expenses found!"
     />
   );
 };

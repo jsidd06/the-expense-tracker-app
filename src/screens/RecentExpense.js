@@ -14,7 +14,11 @@ const RecentExpenseScreen = () => {
   });
 
   return (
-    <ExpensesOutput expenses={recentExpense} expensesPeriodName="Last 7 Days" />
+    <ExpensesOutput
+      expenses={recentExpense}
+      expensesPeriodName="Last 7 Days"
+      fallBackText="No registered expenses are available last 7 days."
+    />
   );
 };
 
