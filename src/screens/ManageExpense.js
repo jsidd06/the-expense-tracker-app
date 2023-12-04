@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import React, { useContext, useLayoutEffect } from "react";
 import IconButton from "../components/UI/IconButton";
 import { GlobalStyles } from "../constants/style";
@@ -26,6 +26,19 @@ const ManageExpenseScreen = ({ route, navigation }) => {
   };
 
   const confirmHandler = () => {
+    if (isEditing) {
+      expensesCtx.updateExpenses(expensesId, {
+        description: "Text!!!",
+        amount: 20.33,
+        date: new Date("2023-03-03"),
+      });
+    } else {
+      expensesCtx.addExpenses({
+        description: "Text",
+        amount: 25.9,
+        date: new Date("2023-04-02"),
+      });
+    }
     navigation.goBack();
   };
 
