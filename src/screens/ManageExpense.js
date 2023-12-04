@@ -45,15 +45,11 @@ const ManageExpenseScreen = ({ route, navigation }) => {
 
   return (
     <View style={styles.rootCtn}>
-      <ExpensesForm />
-      <View style={styles.btnCtn}>
-        <Button mode="flat" style={styles.button} onPress={cancelHandler}>
-          Cancel
-        </Button>
-        <Button style={styles.button} onPress={confirmHandler}>
-          {isEditing ? "Update" : "Add"}
-        </Button>
-      </View>
+      <ExpensesForm
+        submitHandlerLabel={isEditing ? "Update" : "Add"}
+        onCancel={cancelHandler}
+      />
+
       {isEditing && (
         <View style={styles.subCtn}>
           <IconButton
@@ -82,14 +78,5 @@ const styles = StyleSheet.create({
     borderTopWidth: 2,
     borderTopColor: GlobalStyles.colors.primary200,
     alignItems: "center",
-  },
-  btnCtn: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  button: {
-    minWidth: 120,
-    marginHorizontal: 8,
   },
 });

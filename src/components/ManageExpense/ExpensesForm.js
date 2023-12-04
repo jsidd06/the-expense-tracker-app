@@ -1,10 +1,26 @@
 import { StyleSheet, View, Text } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import Input from "./Input";
 import { GlobalStyles } from "../../constants/style";
+import Button from "../UI/Button";
 
-const ExpensesForm = () => {
-  const amountHandler = () => {};
+const ExpensesForm = ({ onCancel, submitHandlerLabel, onSubmit }) => {
+  const [inputValues, setInputValues] = useState({
+    amount: "",
+    date: "",
+    description: "",
+  });
+  const inputHandler = (key, value) => {
+    setInputValues((prev) => {
+      return {
+        ...prev,
+        [key]: value,
+      };
+    });
+  };
+
+  const submitHandler = () => {};
+
   return (
     <View style={styles.form}>
       <Text style={styles.title}>Your Expense</Text>
@@ -14,7 +30,8 @@ const ExpensesForm = () => {
           label="Amount"
           textConfig={{
             keyboardType: "decimal-pad",
-            onChangeText: amountHandler,
+            onChangeText: inputHandler.bind(this, "amount"),
+            value: inputValues.amount,
           }}
         />
         <Input
@@ -23,7 +40,8 @@ const ExpensesForm = () => {
           textConfig={{
             placeholder: "YYYY-MM-DD",
             maxLength: 10,
-            onChangeText: () => {},
+            onChangeText: inputHandler.bind(this, "date"),
+            value: inputValues.date,
           }}
         />
       </View>
@@ -31,8 +49,18 @@ const ExpensesForm = () => {
         label="Description"
         textConfig={{
           multiline: true,
+          onChangeText: inputHandler.bind(this, "description"),
+          value: inputValues.description,
         }}
       />
+      <View style={styles.btnCtn}>
+        <Button mode="flat" style={styles.button} onPress={onCancel}>
+          Cancel
+        </Button>
+        <Button style={styles.button} onPress={submitHandler}>
+          {submitHandlerLabel}
+        </Button>
+      </View>
     </View>
   );
 };
@@ -57,5 +85,14 @@ const styles = StyleSheet.create({
   },
   rowInput: {
     flex: 1,
+  },
+  btnCtn: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  button: {
+    minWidth: 120,
+    marginHorizontal: 8,
   },
 });
