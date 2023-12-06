@@ -17,6 +17,10 @@ const ManageExpenseScreen = ({ route, navigation }) => {
     });
   }, [navigation, isEditing]);
 
+  const selectedExpense = expensesCtx.expenses.find(
+    (exp) => exp.id === expensesId
+  );
+
   const deleteHandler = () => {
     expensesCtx.deleteExpenses(expensesId);
     navigation.goBack();
@@ -41,6 +45,7 @@ const ManageExpenseScreen = ({ route, navigation }) => {
         submitHandlerLabel={isEditing ? "Update" : "Add"}
         onSubmit={confirmHandler}
         onCancel={cancelHandler}
+        defaultValues={selectedExpense}
       />
 
       {isEditing && (
